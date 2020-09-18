@@ -254,16 +254,16 @@ function Lang() {
  */
 function Aff_cardMovies(dataSearch) {
   var card = document.createElement("div");
-  card.className = "card m-4";
+  card.className = "card";
   card.id = "card";
 
   var affiche = document.createElement("img");
   affiche.className = "card-img-top zoom";
-  affiche.src =
-    "https://image.tmdb.org/t/p/w300" + dataSearch.results[i].poster_path;
+  affiche.src = "https://image.tmdb.org/t/p/w300" + dataSearch.results[i].poster_path;
   affiche.style.height = "400px";
+
   var body = document.createElement("div");
-  body.className = "card-body";
+  body.className = "card-body position-absolute";
 
   var titre = document.createElement("h5");
   titre.className = "card-title";
@@ -271,14 +271,11 @@ function Aff_cardMovies(dataSearch) {
 
   var description = dataSearch.results[i].overview;
   var synopsis = document.createElement("p");
-  synopsis.className = "card-text";
+  synopsis.className = "card-text synopsis";
   synopsis.innerText = description.slice(0, 150) + " ...";
-  // if (description = "") {
-  //   description.innerText = "Pas de synopsis..";
-  // }
 
-  var foot = document.createElement("div");
-  foot.className = "card-footer";
+  // var foot = document.createElement("div");
+  // foot.className = "card-footer";
 
   var sortie = dataSearch.results[i].release_date;
   var small = document.createElement("small");
@@ -312,41 +309,30 @@ function Aff_cardMovies(dataSearch) {
 
   card.appendChild(affiche);
   card.appendChild(body);
-  card.appendChild(foot);
+  // card.appendChild(foot);
   body.appendChild(titre);
   body.appendChild(synopsis);
   body.appendChild(btnD);
-  btnD.appendChild(spanD);
   body.appendChild(btnT);
-  btnT.appendChild(spanT);
-  foot.appendChild(small);
+  // foot.appendChild(small);
 
-  // $("#cardg").slideDown();
   cardgroup.appendChild(card);
 
   $("#card").hover(function () {
-    
-      $(this).animate(
-        {
-          marginTop: "-=1%",
-        },
-        200
-      );
-    },
-    function () {
-      $(this).animate(
-        {
-          marginTop: "0%",
-        },
-        200
-      );
+    if ($(this).hasClass("active")){
+      $(".card-body").slideUp(function () {
+        // $('.card').removeClass('active');
+      });
+    } else {
+      // $('.card').addClass('active');
+      $('.card-body').slideDown();
+    }
   });
 }
 
 function valid_msg(confirm) {
   confirm.style.display = "block";
   confirm.textContent = "Recherche " + saisie_movie.value + " effectuée..";
-  confirm.style.width = "300px";
 
   var time = setInterval(function () {
     confirm.style.display = "none";

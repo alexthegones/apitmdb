@@ -6,12 +6,6 @@ body {
 
 }
 
-.container {
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 
 input[type=text] {
   padding: 6px;
@@ -35,6 +29,13 @@ button:hover {
   background: #ccc;
 }
 
+#success {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 50px;
+  margin-right: 300px;
+}
 
 .film-details {
   float: left;
@@ -53,9 +54,12 @@ button:hover {
   text-shadow: 0 1px 2px rgba(black, .15);
 }
 
-.centre {
-  margin-left: 150px;
- 
+.card-body {
+  display: none;
+}
+
+.card:hover {
+    opacity: 0.5;
 }
 
 .zoom img {
@@ -68,17 +72,29 @@ button:hover {
   /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
-.card:hover {
-  top: -10px;
+.card.active {
+  transform: translateY(-3%);
+  /* transform: scale(1.05); */
   box-shadow: 0 14px 28px rgba(191, 234, 245, 0.25), 0 10px 10px rgba(245, 240, 240, 0.22);
 }
 
 .card {
   position: relative;
+  margin: 5px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.synopsis {
+  text-align: justify;
+}
+
+#cardg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 img:hover {

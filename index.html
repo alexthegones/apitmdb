@@ -15,34 +15,13 @@
     />
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="style.css" />
-    <title>Ajax</title>
+    <title>Api tmdb</title>
   </head>
 
   <body>
-    <!-- <div class="topnav">
-      <a id="home" class="active" href="index.html">Home</a>
-      <a id="home" href="">Popular</a>
-      <div class="search-container">
-        <button class="search" type="reset" id="clear">
-          <i class="fa fa-times"></i>
-        </button>
-        <button class="search" type="button" id="refresh">
-          <i class="fa fa-sync"></i>
-        </button>
-        <input id="saisie" type="text" placeholder="Search.." />
-        <button class="search" type="button" id="search">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
-    </div>
-    <select class="custom-select" id="lang" style="width: 230px;">
-      <option selected>Sélectionnez le language</option>
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-    </select> -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="index.html"
-        ><span class="material-icons"> movie </span>Filmotheque</a
+        ><span class="material-icons"> movie </span>API TMDB</a
       >
       <button
         class="navbar-toggler"
@@ -111,24 +90,23 @@
           </button>
         </div>
       </div>
+      <div
+        class="alert alert-success "
+        role="alert"
+        id="success"
+        style="display: none"
+      >
+        <!--Message de confirmation ou d'erreur-->
+      </div>
     </div>
 
-    <div
-      class="alert alert-success m-3"
-      role="alert"
-      id="success"
-      style="display: none;"
-    >
-      <!--Message de confirmation ou d'erreur-->
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-5 centre" id="cardg">
+    <div class="row row-cols-1 row-cols-md-6" id="cardg">
       <!-- Affichage de la liste des cards -->
     </div>
 
     <script src="app.js"></script>
     <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"
     ></script>
