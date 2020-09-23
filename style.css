@@ -2,10 +2,7 @@ body {
   background-image: url("background-cinema.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-
-
 }
-
 
 input[type=text] {
   padding: 6px;
@@ -25,9 +22,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #ccc;
-}
 
 #success {
   display: flex;
@@ -37,70 +31,112 @@ button:hover {
   margin-right: 300px;
 }
 
-.film-details {
-  float: left;
-  width: 80%;
-  padding-left: 0.5em;
-  box-sizing: border-box;
-}
-
 .film-title {
   text-align: center;
   font-size: 16;
   margin-bottom: 10px;
   text-transform: uppercase;
   font-weight: bold;
-  color: white;
+  color: black;
   text-shadow: 0 1px 2px rgba(black, .15);
 }
 
-.card-body {
-  display: none;
-}
-
-.card:hover {
-    opacity: 0.5;
-}
-
-.zoom img {
-  transition: transform .3s;
-  /* Animation */
-}
-
-.zoom:hover {
-  transform: scale(1.05);
-  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
-
-.card.active {
-  transform: translateY(-3%);
-  /* transform: scale(1.05); */
-  box-shadow: 0 14px 28px rgba(191, 234, 245, 0.25), 0 10px 10px rgba(245, 240, 240, 0.22);
-}
-
-.card {
-  position: relative;
-  margin: 5px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-}
-
-.synopsis {
-  text-align: justify;
-}
-
+/******************* CARD ****************/
 #cardg {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-img:hover {
-  transition: 0.2s all ease-out;
+.card img {
+  width: 100%;
+  height: 100%;
+  transition: all .5s cubic-bezier(.8, .5, .2, 1.4);
 }
 
+.card {
+  position: relative;
+  margin: 5px;
+  border-radius: 10px;
+  border: solid #ccc 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.card-body {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, .7);
+  width: 100%;
+  height: 100%;
+  transition: all .7s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  clip-path: circle(0% at 100% 100%);
+}
+
+.card:hover .card-body {
+  left: 0px;
+  transition: all .7s ease-in-out;
+  clip-path: circle(75%);
+}
+
+.card:hover {
+  transition: all .5s cubic-bezier(.8, .5, .2, 1.4);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, .3);
+  transform: scale(.97);
+}
+
+.card:hover img {
+  transition: all .4s cubic-bezier(.8, .5, .2, 1.4);
+  transform: scale(1.6) rotate(20deg);
+  filter: blur(3px);
+}
+
+.card .synopsis {
+  overflow-y: scroll;
+  line-height: 24px;
+  height: 70%;
+  color: black;
+}
+
+.card button:hover {
+  transform: scale(.95) translateX(-5px);
+  transition: all .5s ease-in-out;
+}
+
+button {
+  width: fit-content;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, .4);
+  transition: all .5s ease-in-out;
+}
+
+button:hover {
+  background: #ccc;
+}
+
+.btn_T {
+  background-color: #ff3838;
+}
+
+.btn_D {
+  background-color: rgb(69, 114, 196);
+}
+
+.btnT .btn_D i {
+  font-size: 20px;
+  float: left;
+}
+
+/**************MediaQueries************/
 @media screen and (max-width: 600px) {
   .topnav .search-container {
     float: none;

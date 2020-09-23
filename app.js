@@ -24,15 +24,15 @@ function getMovies() {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       //si la requete est terminée et que la réponse est prête||Status OK
-      var dataSearch = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This Objet XHR
+      var dataSearch = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This->Objet XHR
       console.log(dataSearch);
       for (i = 0; i < dataSearch.results.length; i++) {
-        //Tableau_Données(dataSearch);
+        //* Tableau_Données(dataSearch);
         Aff_cardMovies(dataSearch);
         valid_msg(success);
       }
     } else if (this.readyState == 4 && this.status == 404) {
-      //Affichage d'un message d'erreur si status invalide
+      //* Affichage d'un message d'erreur si status invalide
       alert("Erreur 404 :/");
     }
   };
@@ -47,7 +47,7 @@ function getMovies() {
       "&query=" +
       saisie_movie.value,
     true
-  ); //Initialisation de l'objet avant de l'envoyé | Asynchrone
+  ); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
   xhr.send(); //Envoi de la requête vers serveur
 }
 
@@ -61,14 +61,14 @@ var urlYtb = "https://www.youtube.com/embed/";
 function getTrailer(id) {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      //si la requete est terminée et que la réponse est prête||Status OK
+      //* si la requete est terminée et que la réponse est prête||Status OK
       var dataVideo = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This Objet XHR
       for (i = 0; i < dataVideo.results.length; i++) {
         var video = dataVideo.results[i].key;
         window.open(urlYtb + video);
       }
     } else if (this.readyState == 4 && this.status == 404) {
-      //Affichage d'un message d'erreur si status invalide
+      //* Affichage d'un message d'erreur si status invalide
       alert("Erreur 404 :/");
     }
   };
@@ -172,66 +172,9 @@ send.addEventListener("click", function () {
   }
 });
 
-// var refresh = document.getElementById("refresh");
-// refresh.addEventListener("click", function () {
-//   window.location.reload();
-// });
-
 saisie_movie.addEventListener("click", function () {
   saisie_movie.value = "";
 });
-
-function entete() {
-  //En-tête[Thead]
-  var ligne = document.createElement("tr");
-
-  var Th_titre = document.createElement("th");
-  Th_titre.style.textAlign = "center";
-  var titre = document.createElement("h4");
-  titre.textContent = "Titre";
-  ligne.appendChild(Th_titre);
-  Th_titre.appendChild(titre);
-
-  var Th_annee = document.createElement("th");
-  Th_annee.style.textAlign = "center";
-  Th_annee.width = "150";
-  var annee = document.createElement("h4");
-  annee.textContent = "Année";
-  ligne.appendChild(Th_annee);
-  Th_annee.appendChild(annee);
-
-  var Th_card = document.createElement("th");
-  Th_card.style.textAlign = "center";
-  var card = document.createElement("h4");
-  card.textContent = "Affiche";
-  ligne.appendChild(Th_card);
-  Th_card.appendChild(card);
-
-  document.getElementById("contenu").appendChild(ligne);
-}
-
-function Tableau_Données(dataSearch) {
-  var ligne = document.createElement("tr");
-
-  var cell_titre = document.createElement("td");
-  cell_titre.innerHTML += dataSearch.Search[i].Title;
-
-  ligne.appendChild(cell_titre);
-
-  var cell_annee = document.createElement("td");
-  cell_annee.innerHTML += dataSearch.Search[i].Year;
-
-  ligne.appendChild(cell_annee);
-
-  var cell_card = document.createElement("td");
-  var card = document.createElement("img");
-  card.src += dataSearch.Search[i].Poster;
-  card.width = "100";
-  cell_card.appendChild(card);
-  ligne.appendChild(cell_card);
-
-  document.getElementById("contenu").appendChild(ligne);
-}
 
 /**
  * Option filtrage des différentes traduction possible de la recherche
@@ -255,27 +198,24 @@ function Lang() {
 function Aff_cardMovies(dataSearch) {
   var card = document.createElement("div");
   card.className = "card";
-  card.id = "card";
+  // card.id = "card" + i;
 
   var affiche = document.createElement("img");
-  affiche.className = "card-img-top zoom";
-  affiche.src = "https://image.tmdb.org/t/p/w300" + dataSearch.results[i].poster_path;
+  affiche.className = "card-img-top";
+  affiche.src =
+    "https://image.tmdb.org/t/p/w300" + dataSearch.results[i].poster_path;
   affiche.style.height = "400px";
 
   var body = document.createElement("div");
-  body.className = "card-body position-absolute";
+  body.className = "card-body ";
 
   var titre = document.createElement("h5");
-  titre.className = "card-title";
+  titre.className = "film-title";
   titre.innerText = dataSearch.results[i].title;
 
-  var description = dataSearch.results[i].overview;
   var synopsis = document.createElement("p");
-  synopsis.className = "card-text synopsis";
-  synopsis.innerText = description.slice(0, 150) + " ...";
-
-  // var foot = document.createElement("div");
-  // foot.className = "card-footer";
+  synopsis.className = "synopsis";
+  synopsis.innerText = dataSearch.results[i].overview;
 
   var sortie = dataSearch.results[i].release_date;
   var small = document.createElement("small");
@@ -284,50 +224,37 @@ function Aff_cardMovies(dataSearch) {
   small.innerText = "Sortie : " + sortie;
 
   var id = dataSearch.results[i].id;
-
+  
   var btnD = document.createElement("button");
   btnD.type = "button";
-  btnD.innerText = "More details";
-  btnD.className = "btn btn-info";
-  var spanD = document.createElement("span");
-  spanD.innerHTML = "details";
-  spanD.className = "material-icons";
+  btnD.innerText = "More details ";
+  btnD.className = " row btn_D";
+  var i_Detail = document.createElement("i");
+  i_Detail.className = "fas fa-info";
   btnD.addEventListener("click", function () {
     getDetails(id);
   });
 
   var btnT = document.createElement("button");
   btnT.type = "button";
-  btnT.innerText = "Trailer";
-  btnT.className = "btn btn-info";
-  var spanT = document.createElement("span");
-  spanT.innerHTML = "video_library";
-  spanT.className = "material-icons";
+  btnT.innerText = "Trailer on Youtube ";
+  btnT.className = "btn_T";
+  var i_Ytb = document.createElement("i");
+  i_Ytb.className = "fab fa-youtube i";
   btnT.addEventListener("click", function () {
     getTrailer(id);
   });
 
   card.appendChild(affiche);
   card.appendChild(body);
-  // card.appendChild(foot);
   body.appendChild(titre);
   body.appendChild(synopsis);
   body.appendChild(btnD);
   body.appendChild(btnT);
-  // foot.appendChild(small);
+  btnT.appendChild(i_Ytb);
+  btnD.appendChild(i_Detail);
 
   cardgroup.appendChild(card);
-
-  $("#card").hover(function () {
-    if ($(this).hasClass("active")){
-      $(".card-body").slideUp(function () {
-        // $('.card').removeClass('active');
-      });
-    } else {
-      // $('.card').addClass('active');
-      $('.card-body').slideDown();
-    }
-  });
 }
 
 function valid_msg(confirm) {
