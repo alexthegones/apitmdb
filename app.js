@@ -219,7 +219,7 @@ function Aff_cardMovies(dataSearch) {
 
   var btnD = document.createElement("button");
   btnD.type = "button";
-  btnD.innerText = "More details ";
+  btnD.innerText = "Details ";
   btnD.className = " row btn_D";
   var i_Detail = document.createElement("i");
   i_Detail.className = "fas fa-info";
