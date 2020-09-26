@@ -1,5 +1,5 @@
-var send = document.getElementById("searchM");
-var saisie_movie = document.getElementById("searchMovie");
+var send = document.getElementById("search_btn");
+var saisie_movie = document.getElementById("search_input");
 var success = document.getElementById("success");
 var contenu = document.createElement("tbody");
 var cardgroup = document.getElementById("cardg");
@@ -10,9 +10,8 @@ var upcoming = document.getElementById("upcoming");
   Lang();
 })();
 
-var xhr = new XMLHttpRequest(); //Nouvel objet xhr [Envoi de requête AJAX]
-//var urlOMDB = "http://www.omdbapi.com/?apikey=c2337af3&s=" + saisie_movie.value;
-var key = "8dd536bbbf7c8d2bf05ad77b56566c1d"; //API KEY
+var xhr = new XMLHttpRequest(); //*Nouvel objet xhr [Envoi de requête AJAX]
+var key = "8dd536bbbf7c8d2bf05ad77b56566c1d"; //*API KEY
 var baseURL = "https://api.themoviedb.org/3/";
 var lang = "fr-FR";
 
@@ -23,7 +22,7 @@ var lang = "fr-FR";
 function getMovies() {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      //si la requete est terminée et que la réponse est prête||Status OK
+      //* Si la requete est terminée et que la réponse est prête||Status OK
       var dataSearch = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This->Objet XHR
       console.log(dataSearch);
       for (i = 0; i < dataSearch.results.length; i++) {
@@ -154,22 +153,15 @@ toprated.addEventListener("click", function () {
 
 saisie_movie.addEventListener("keyup", function (e) {
   if (e.keyCode == 13) {
-    if (saisie_movie.value.length < 4) {
-      alert("La saisie doit contenir au moins 4 caractères..");
-    } else {
-      cardgroup.innerHTML = "";
-      getMovies();
-    }
+    cardgroup.innerHTML = "";
+    getMovies();
   }
 });
 
 send.addEventListener("click", function () {
-  if (saisie_movie.value.length < 4) {
-    alert("La saisie doit contenir au moins 4 caractères..");
-  } else {
     cardgroup.innerHTML = "";
     getMovies();
-  }
+
 });
 
 saisie_movie.addEventListener("click", function () {
@@ -183,7 +175,7 @@ saisie_movie.addEventListener("click", function () {
 function Lang() {
   var lang = document.getElementsByName("lang");
   for (let i = 0; i < lang.length; i++) {
-    lang[i].addEventListener("click", function () {
+    lang[i].addEventListener("change", function () {
       lang = this.target;
       cardgroup.innerHTML = "";
       getMovies();
@@ -224,7 +216,7 @@ function Aff_cardMovies(dataSearch) {
   small.innerText = "Sortie : " + sortie;
 
   var id = dataSearch.results[i].id;
-  
+
   var btnD = document.createElement("button");
   btnD.type = "button";
   btnD.innerText = "More details ";

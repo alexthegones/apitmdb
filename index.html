@@ -71,25 +71,12 @@
         </ul>
       </div>
     </nav>
-    <div class="row">
-      <div class="input-group w-25 m-2 p-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Rechercher un film :</span>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          id="searchMovie"
-          placeholder="Saisir un film.."
-          aria-label="Recipient's username"
-          aria-describedby="button-addon2"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="searchM">
-            Search
-          </button>
-        </div>
-      </div>
+    <div class="search-bar">
+      <input type="search" id="search_input" pattern=".*\S.*" required>
+      <button class="search-btn" id="search_btn" type="submit">
+      </button>
+      <!-- <span class="span_search">Search a movie</span> -->
+    </div>
       <div
         class="alert alert-success "
         role="alert"
