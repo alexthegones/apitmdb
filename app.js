@@ -23,11 +23,11 @@ function getMovies() {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       //* Si la requete est terminée et que la réponse est prête||Status OK
-      var dataSearch = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This->Objet XHR
-      console.log(dataSearch);
-      for (i = 0; i < dataSearch.results.length; i++) {
+      let data = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This->Objet XHR
+      for (i = 0; i < data.results.length; i++) {
+        console.log(data);
         //* Tableau_Données(dataSearch);
-        Aff_cardMovies(dataSearch);
+        Aff_cardMovies(data);
         valid_msg(success);
       }
     } else if (this.readyState == 4 && this.status == 404) {
@@ -39,12 +39,12 @@ function getMovies() {
   xhr.open(
     "GET",
     baseURL +
-      "search/movie?api_key=" +
-      key +
-      "&language=" +
-      lang +
-      "&query=" +
-      saisie_movie.value,
+    "search/movie?api_key=" +
+    key +
+    "&language=" +
+    lang +
+    "&query=" +
+    saisie_movie.value,
     true
   ); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
   xhr.send(); //Envoi de la requête vers serveur
@@ -159,8 +159,8 @@ saisie_movie.addEventListener("keyup", function (e) {
 });
 
 send.addEventListener("click", function () {
-    cardgroup.innerHTML = "";
-    getMovies();
+  cardgroup.innerHTML = "";
+  getMovies();
 
 });
 
@@ -209,12 +209,11 @@ function Aff_cardMovies(dataSearch) {
   synopsis.className = "synopsis";
   synopsis.innerText = dataSearch.results[i].overview;
 
-  var sortie = dataSearch.results[i].release_date;
-  var small = document.createElement("small");
-  small.className = "text-muted";
-  small.style.fontSize = "16px";
-  small.innerText = "Sortie : " + sortie;
+  var sortie = document.createElement("p");
+  sortie.className = "sortie";
+  sortie.innerText = "Sortie en " + dataSearch.results[i].release_date;
 
+  //* Récupération de l'id pour getTrailer et getImdb
   var id = dataSearch.results[i].id;
 
   var btnD = document.createElement("button");
@@ -241,6 +240,7 @@ function Aff_cardMovies(dataSearch) {
   card.appendChild(body);
   body.appendChild(titre);
   body.appendChild(synopsis);
+  body.appendChild(sortie);
   body.appendChild(btnD);
   body.appendChild(btnT);
   btnT.appendChild(i_Ytb);
