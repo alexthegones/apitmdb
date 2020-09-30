@@ -41,11 +41,12 @@ body {
   cursor: pointer;
 }
 
-.fas {
-  display: flex;
-  text-align: center;
-  padding: 5px;
-  font-size: 22px;
+.fa-search {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  transform: translate(-50%, -50%);
   color: #171717;
 }
 
@@ -174,13 +175,8 @@ button:hover {
   margin-right: 5px;
 }
 
-.btnT .btn_D i {
-  font-size: 20px;
-}
-
-.fa-info {
+.i {
   margin-left: 5px;
-  color: azure;
 }
 
 .sortie {
@@ -193,4 +189,14 @@ button:hover {
 
 
 /**************MediaQueries************/
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 480px) {
+
+  #cardg {
+    flex-direction: column;
+  }
+
+  button {
+    margin-right: 5px;
+  }
+
+}

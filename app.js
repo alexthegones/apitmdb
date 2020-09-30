@@ -25,8 +25,6 @@ function getMovies() {
       //* Si la requete est terminée et que la réponse est prête||Status OK
       let data = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This->Objet XHR
       for (i = 0; i < data.results.length; i++) {
-        console.log(data);
-        //* Tableau_Données(dataSearch);
         Aff_cardMovies(data);
         valid_msg(success);
       }
@@ -36,17 +34,7 @@ function getMovies() {
     }
   };
 
-  xhr.open(
-    "GET",
-    baseURL +
-    "search/movie?api_key=" +
-    key +
-    "&language=" +
-    lang +
-    "&query=" +
-    saisie_movie.value,
-    true
-  ); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
+  xhr.open("GET", baseURL + "search/movie?api_key=" + key + "&language=" + lang + "&query=" + saisie_movie.value, true); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
   xhr.send(); //Envoi de la requête vers serveur
 }
 
@@ -221,7 +209,7 @@ function Aff_cardMovies(dataSearch) {
   btnD.innerText = "Details ";
   btnD.className = " row btn_D";
   var i_Detail = document.createElement("i");
-  i_Detail.className = "fas fa-info";
+  i_Detail.className = "fas fa-info i";
   btnD.addEventListener("click", function () {
     getDetails(id);
   });
