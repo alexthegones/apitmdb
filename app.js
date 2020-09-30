@@ -34,7 +34,17 @@ function getMovies() {
     }
   };
 
-  xhr.open("GET", baseURL + "search/movie?api_key=" + key + "&language=" + lang + "&query=" + saisie_movie.value, true); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
+  xhr.open(
+    "GET",
+    baseURL +
+      "search/movie?api_key=" +
+      key +
+      "&language=" +
+      lang +
+      "&query=" +
+      saisie_movie.value,
+    true
+  ); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
   xhr.send(); //Envoi de la requête vers serveur
 }
 
@@ -149,11 +159,6 @@ saisie_movie.addEventListener("keyup", function (e) {
 send.addEventListener("click", function () {
   cardgroup.innerHTML = "";
   getMovies();
-
-});
-
-saisie_movie.addEventListener("click", function () {
-  saisie_movie.value = "";
 });
 
 /**
@@ -246,3 +251,29 @@ function valid_msg(confirm) {
     clearInterval(time);
   }, 2500);
 }
+
+saisie_movie.addEventListener("input", function (e) {
+  if (e.target.value.length >= 2) {
+    saisie_movie.style.borderColor = "green";
+  } else {
+    saisie_movie.style.borderColor = "red";
+  }
+});
+
+//* Animation Jquery
+$(".input").keyup(function () {
+  $("#cardg").animate(
+    {
+      left: 1,
+    },
+    2500
+  );
+});
+$(".search-btn").click(function () {
+  $("#cardg").animate(
+    {
+      left: 1,
+    },
+    2500
+  );
+});
