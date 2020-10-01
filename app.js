@@ -7,7 +7,7 @@ var toprated = document.getElementById("top_rated");
 var upcoming = document.getElementById("upcoming");
 
 (function () {
-  Lang();
+  Lang()
 })();
 
 var xhr = new XMLHttpRequest(); //*Nouvel objet xhr [Envoi de requête AJAX]
@@ -166,12 +166,18 @@ send.addEventListener("click", function () {
  * @function Lang
  */
 function Lang() {
-  var lang = document.getElementsByName("lang");
-  for (let i = 0; i < lang.length; i++) {
-    lang[i].addEventListener("change", function () {
-      lang = this.target;
-      cardgroup.innerHTML = "";
-      getMovies();
+  let language = document.getElementsByName("lang");
+  for (let i = 0; i < language.length; i++) {
+    language[i].addEventListener("click", function (e) {
+      if (this.target == "en-US") {
+        cardgroup.innerHTML = "";
+        lang = "en-US";
+        getMovies();
+      } else if (this.target == "fr-FR") {
+        cardgroup.innerHTML = "";
+        lang = "fr-FR";
+        getMovies();
+      }
     });
   }
 }
