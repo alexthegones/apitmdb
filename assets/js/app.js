@@ -7,11 +7,11 @@ var toprated = document.getElementById("top_rated");
 var upcoming = document.getElementById("upcoming");
 
 (function () {
-  Lang()
+  Lang();
 })();
 
-var xhr = new XMLHttpRequest(); //*Nouvel objet xhr [Envoi de requête AJAX]
-var key = "8dd536bbbf7c8d2bf05ad77b56566c1d"; //*API KEY
+var xhr = new XMLHttpRequest(); //* Nouvel objet xhr [Envoi de requête AJAX]
+var key = "8dd536bbbf7c8d2bf05ad77b56566c1d"; //* API KEY
 var baseURL = "https://api.themoviedb.org/3/";
 var lang = "fr-FR";
 
@@ -23,7 +23,7 @@ function getMovies() {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       //* Si la requete est terminée et que la réponse est prête||Status OK
-      let data = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This->Objet XHR
+      let data = JSON.parse(this.response); //* Objet JSON de données[Tableau de données]/This->Objet XHR
       for (i = 0; i < data.results.length; i++) {
         Aff_cardMovies(data);
         valid_msg(success);
@@ -45,7 +45,7 @@ function getMovies() {
       saisie_movie.value,
     true
   ); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
-  xhr.send(); //Envoi de la requête vers serveur
+  xhr.send(); //* Envoi de la requête vers serveur
 }
 
 var urlYtb = "https://www.youtube.com/embed/";
@@ -58,20 +58,17 @@ var urlYtb = "https://www.youtube.com/embed/";
 function getTrailer(id) {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      //* si la requete est terminée et que la réponse est prête||Status OK
-      var dataVideo = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This Objet XHR
+      var dataVideo = JSON.parse(this.response);
       for (i = 0; i < dataVideo.results.length; i++) {
         var video = dataVideo.results[i].key;
         window.open(urlYtb + video);
       }
     } else if (this.readyState == 4 && this.status == 404) {
-      //* Affichage d'un message d'erreur si status invalide
       alert("Erreur 404 :/");
     }
   };
-
-  xhr.open("GET", baseURL + "movie/" + id + "/videos?api_key=" + key, true); //Initialisation de l'objet avant de l'envoyé | Asynchrone
-  xhr.send(); //Envoi de la requête vers serveur
+  xhr.open("GET", baseURL + "movie/" + id + "/videos?api_key=" + key, true);
+  xhr.send();
 }
 
 var urlImdb = "https://www.imdb.com/title/";
@@ -83,18 +80,15 @@ var urlImdb = "https://www.imdb.com/title/";
 function getDetails(id) {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      //si la requete est terminée et que la réponse est prête||Status OK
-      var dataDetails = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This Objet XHR
+      var dataDetails = JSON.parse(this.response);
       var details = dataDetails.imdb_id;
       window.open(urlImdb + details);
     } else if (this.readyState == 4 && this.status == 404) {
-      //Affichage d'un message d'erreur si status invalide
       alert("Erreur 404 :/");
     }
   };
-
-  xhr.open("GET", baseURL + "movie/" + id + "?api_key=" + key, true); //Initialisation de l'objet avant de l'envoyé | Asynchrone
-  xhr.send(); //Envoi de la requête vers serveur
+  xhr.open("GET", baseURL + "movie/" + id + "?api_key=" + key, true);
+  xhr.send();
 }
 /**
  * Appel API Movies pour Top Rated [GET Top Rated]
@@ -103,19 +97,17 @@ function getDetails(id) {
 function getTopRated() {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      //si la requete est terminée et que la réponse est prête||Status OK
-      var dataRated = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This Objet XHR
+      var dataRated = JSON.parse(this.response);
       for (i = 0; i < dataRated.results.length; i++) {
         Aff_cardMovies(dataRated);
       }
     } else if (this.readyState == 4 && this.status == 404) {
-      //Affichage d'un message d'erreur si status invalide
       alert("Erreur 404 :/");
     }
   };
 
-  xhr.open("GET", baseURL + "movie/top_rated" + "?api_key=" + key, true); //Initialisation de l'objet avant de l'envoyé | Asynchrone
-  xhr.send(); //Envoi de la requête vers serveur
+  xhr.open("GET", baseURL + "movie/top_rated" + "?api_key=" + key, true);
+  xhr.send();
 }
 /**
  * Appel API Movies pour Top Rated [GET Top Rated]
@@ -124,19 +116,17 @@ function getTopRated() {
 function getUpcoming() {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      //si la requete est terminée et que la réponse est prête||Status OK
-      var dataRated = JSON.parse(this.response); //Objet JSON de données[Tableau de données]/This Objet XHR
+      var dataRated = JSON.parse(this.response);
       for (i = 0; i < dataRated.results.length; i++) {
         Aff_cardMovies(dataRated);
       }
     } else if (this.readyState == 4 && this.status == 404) {
-      //Affichage d'un message d'erreur si status invalide
       alert("Erreur 404 :/");
     }
   };
 
-  xhr.open("GET", baseURL + "movie/upcoming" + "?api_key=" + key, true); //Initialisation de l'objet avant de l'envoyé | Asynchrone
-  xhr.send(); //Envoi de la requête vers serveur
+  xhr.open("GET", baseURL + "movie/upcoming" + "?api_key=" + key, true);
+  xhr.send();
 }
 
 upcoming.addEventListener("click", function () {
@@ -151,14 +141,25 @@ toprated.addEventListener("click", function () {
 
 saisie_movie.addEventListener("keyup", function (e) {
   if (e.keyCode == 13) {
-    cardgroup.innerHTML = "";
-    getMovies();
+    e.preventDefault();
+    if (saisie_movie.value == "") {
+      alert("Veuillez saisir un titre de film");
+    } else {
+      cardgroup.innerHTML = "";
+      getMovies();
+    }
   }
 });
 
-send.addEventListener("click", function () {
-  cardgroup.innerHTML = "";
-  getMovies();
+send.addEventListener("click", function (e) {
+  if (saisie_movie.value == "") {
+    e.preventDefault();
+    alert("Veuillez saisir un titre de film");
+    saisie_movie.focus();
+  } else {
+    cardgroup.innerHTML = "";
+    getMovies();
+  }
 });
 
 /**
@@ -257,14 +258,6 @@ function valid_msg(confirm) {
     clearInterval(time);
   }, 2500);
 }
-
-saisie_movie.addEventListener("input", function (e) {
-  if (e.target.value.length >= 2) {
-    saisie_movie.style.borderColor = "green";
-  } else {
-    saisie_movie.style.borderColor = "red";
-  }
-});
 
 //* Animation Jquery
 $(".input").keyup(function () {
