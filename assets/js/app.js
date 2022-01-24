@@ -25,6 +25,7 @@ function getMovies() {
       //* Si la requete est terminée et que la réponse est prête||Status OK
       let data = JSON.parse(this.response); //* Objet JSON de données[Tableau de données]/This->Objet XHR
       for (i = 0; i < data.results.length; i++) {
+        // console.log(data);
         Aff_cardMovies(data);
         valid_msg(success);
       }
@@ -46,6 +47,29 @@ function getMovies() {
     true
   ); //* Initialisation de l'objet avant de l'envoyé | Asynchrone
   xhr.send(); //* Envoi de la requête vers serveur
+}
+
+
+/**
+ * Appel API TMDB Recherche de séries (GET Search)
+ */
+ function getTVShow() {
+  fetch(baseURL + "search/tv?api_key=" + key + "&language=" + lang + "&query=" + saisie_movie.value)
+      .then(response => {
+          if (response.ok) {
+              response.json().then(data => {
+                  // console.log(data)
+                  for (i = 0; i < data.results.length; i++){
+                      Aff_cardMovies(data);
+                  }
+              })
+          } else {
+              console.log('Mauvaise réponse du réseau' + response.statusText)
+          }
+      })
+      .catch((error) => {
+          console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message)
+      });
 }
 
 var urlYtb = "https://www.youtube.com/embed/";
@@ -147,6 +171,7 @@ saisie_movie.addEventListener("keyup", function (e) {
     } else {
       cardgroup.innerHTML = "";
       getMovies();
+      getTVShow();
     }
   }
 });
@@ -216,10 +241,14 @@ function Aff_cardMovies(dataSearch) {
   //* Récupération de l'id pour getTrailer et getImdb
   var id = dataSearch.results[i].id;
 
+  var buttons = document.createElement("div");
+  buttons.className = "buttons";
+
   var btnD = document.createElement("button");
   btnD.type = "button";
   btnD.innerText = "Details ";
-  btnD.className = " row btn_D";
+  btnD.className = "btn_D";
+
   var i_Detail = document.createElement("i");
   i_Detail.className = "fas fa-info i";
   btnD.addEventListener("click", function () {
@@ -232,6 +261,7 @@ function Aff_cardMovies(dataSearch) {
   btnT.className = "btn_T";
   var i_Ytb = document.createElement("i");
   i_Ytb.className = "fab fa-youtube i";
+
   btnT.addEventListener("click", function () {
     getTrailer(id);
   });
@@ -241,8 +271,9 @@ function Aff_cardMovies(dataSearch) {
   body.appendChild(titre);
   body.appendChild(synopsis);
   body.appendChild(sortie);
-  body.appendChild(btnD);
-  body.appendChild(btnT);
+  body.appendChild(buttons);
+  buttons.appendChild(btnT);
+  buttons.appendChild(btnD);
   btnT.appendChild(i_Ytb);
   btnD.appendChild(i_Detail);
 
