@@ -10,7 +10,7 @@
 }
 
 body {
-  background-image: url("/background-cinema.jpg");
+  background-image: url("/media/background-cinema.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -150,17 +150,20 @@ button {
   transition: all .5s ease-in-out;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .buttons :hover {
   display: flex;
-  justify-content: center;
   color: white;
 }
 
 button {
   display: inline-block;
-  bottom: 45px;
+  /* bottom: 45px; */
   cursor: pointer;
-  vertical-align: middle;
   text-align: center;
 }
 

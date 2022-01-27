@@ -215,13 +215,16 @@ function Lang() {
 function Aff_cardMovies(dataSearch) {
   var card = document.createElement("div");
   card.className = "card";
-  // card.id = "card" + i;
 
   var affiche = document.createElement("img");
   affiche.className = "card-img-top";
-  affiche.src =
-    "https://image.tmdb.org/t/p/w300" + dataSearch.results[i].poster_path;
-  affiche.style.height = "400px";
+  if(dataSearch.results[i].poster_path){
+    affiche.src = "https://image.tmdb.org/t/p/w300" + dataSearch.results[i].poster_path;
+    affiche.style.height = "400px";
+  }else {
+    affiche.src = "/media/no_movie_poster.jpg";
+    affiche.style.height = "400px";
+  }
 
   var body = document.createElement("div");
   body.className = "card-body ";
@@ -232,7 +235,11 @@ function Aff_cardMovies(dataSearch) {
 
   var synopsis = document.createElement("p");
   synopsis.className = "synopsis";
-  synopsis.innerText = dataSearch.results[i].overview;
+  if(dataSearch.results[i].overview){
+    synopsis.innerText = dataSearch.results[i].overview;
+  }else {
+    synopsis.innerText = "Pas de synopsis disponible.."
+  }
 
   var sortie = document.createElement("p");
   sortie.className = "sortie";
@@ -257,7 +264,7 @@ function Aff_cardMovies(dataSearch) {
 
   var btnT = document.createElement("button");
   btnT.type = "button";
-  btnT.innerText = "Trailer on Youtube ";
+  btnT.innerText = "Trailer Youtube ";
   btnT.className = "btn_T";
   var i_Ytb = document.createElement("i");
   i_Ytb.className = "fab fa-youtube i";
@@ -290,7 +297,7 @@ function valid_msg(confirm) {
   }, 2500);
 }
 
-//* Animation Jquery
+//* Animation Jquery à l'affichage des cards 
 $(".input").keyup(function () {
   $("#cardg").animate(
     {
