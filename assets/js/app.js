@@ -25,7 +25,7 @@ function getMovies() {
       //* Si la requete est terminée et que la réponse est prête||Status OK
       let data = JSON.parse(this.response); //* Objet JSON de données[Tableau de données]/This->Objet XHR
       for (i = 0; i < data.results.length; i++) {
-        // console.log(data);
+        console.log(data);
         Aff_cardMovies(data);
         valid_msg(success);
       }
@@ -245,6 +245,10 @@ function Aff_cardMovies(dataSearch) {
   sortie.className = "sortie";
   sortie.innerText = "Sortie en " + dataSearch.results[i].release_date;
 
+  //* Request genre movie genre : [id:..., name:...]; 
+  genre_request = "https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US";
+  let genre = document.createElement('span');
+  
   //* Récupération de l'id pour getTrailer et getImdb
   var id = dataSearch.results[i].id;
 
@@ -264,7 +268,7 @@ function Aff_cardMovies(dataSearch) {
 
   var btnT = document.createElement("button");
   btnT.type = "button";
-  btnT.innerText = "Trailer Youtube ";
+  btnT.innerText = "Trailer ";
   btnT.className = "btn_T";
   var i_Ytb = document.createElement("i");
   i_Ytb.className = "fab fa-youtube i";
